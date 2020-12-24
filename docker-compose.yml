@@ -1,0 +1,60 @@
+version: '3.4'
+
+services:
+
+  db:
+    image: postgres:latest
+    network_mode: bridge
+    container_name: db
+    volumes:
+      - ./db/postgresql/data
+    expose:
+      - 8081
+    ports:
+      - 8084:5432  
+    restart: always 
+    environment:
+      POSTGRES_DB: petway
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      PGDATA: ./db/postgresql/data
+              
+         
+  backend:
+    image: petwayapi
+    build: ./petwayapi/
+    network_mode: bridge
+    container_name: petwayapi
+    volumes: 
+      - ./petwayapi/target
+    expose:
+      - 8082
+    ports:
+      - 8082:8080
+    #restart: always
+    depends_on:
+      - "db"
+    links:
+      - "db"
+      
+  frontend:  
+    image: petwayfrontend
+    build: ./petwayfrontend/
+    network_mode: bridge
+    container_name: petwayfrontend    
+    volumes: 
+      - ./petwayfrontend/
+    logging:
+        driver: "json-file"
+        options:
+            max-size: "10m"
+            max-file: "5"
+    expose:
+      - 8083
+    ports:
+      - 8081:80
+    restart: always
+    depends_on:
+      - "backend"
+    links:
+      - "backend"

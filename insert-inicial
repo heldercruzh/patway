@@ -1,0 +1,58 @@
+begin transaction;
+
+INSERT INTO public.uf(
+	id, nome, uf)
+	VALUES (1,'Distrito Federal', 'DF');
+	
+INSERT INTO public.uf(
+	id, nome, uf)
+	VALUES (2,'Goias', 'GO');
+	
+INSERT INTO public.municipio(
+	id, codigo_ibge, nome_municipio, uf_id)
+	VALUES (1, '00000000', 'Brasilia', 1);
+	
+INSERT INTO public.municipio(
+	id, codigo_ibge, nome_municipio, uf_id)
+	VALUES (2, '00000002', 'Goiania', 2);
+
+INSERT INTO public.perfil(
+	id, name)
+	VALUES (1, 'Administrador');
+	
+INSERT INTO public.usuario(
+	id, email, senha, token, perfil_id)
+	VALUES (1, 'heldercruzh@gmail.com', '123', null, 1);
+
+INSERT INTO public.pessoa(
+	bairro, 
+	celular, 
+	cep, 
+	complemento, 
+	cpf, 
+	data_nascimento, 
+	endereco, 
+	genero, 
+	nome, numero, rg, telefone, municipio_id, ssp, usuario_id)
+	VALUES (
+		'Sobradinho 2', 
+		'61984251001', 
+		'73081645', 
+		'Subida do mercado Minipreço', 
+		'01360317147', 
+		'2020-03-21', 
+		'Rua 20', 
+		true, 
+		'Helder Silva Cruz', 
+		15, 
+		'2470721', 
+		'61984251001', 
+		1, 
+		2, 
+	    1);
+	
+	
+commit
+
+rollback
+
