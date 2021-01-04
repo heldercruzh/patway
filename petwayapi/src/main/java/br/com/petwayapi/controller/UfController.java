@@ -14,5 +14,7 @@ public class UfController extends GenericController<Uf, Integer> {
 	@Autowired
     public UfController(UfRepository repo) {
         super(repo);
+        
+        
     }
 }

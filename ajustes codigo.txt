@@ -1,0 +1,75 @@
+
+
+Mostra mensagem invalido antes de concluir (
+Vermelho (Nome, endereço, bairro)
+MSG (telefone, celula, cpf, cep, email
+
+
+
+Valiadar o backend
+Criar o Swaggar
+Criar Teste Unitário
+Criar Esqueci a Senha
+colocar validações customizadas
+Criar Login
+(tirar o erro do id, campo usuario, colocar confirmar senha e senha forte)
+Spring bach -> https://spring.io/projects/spring-batch
+
+
+orientações springboot
+1) https://www.oracle.com/br/technical-resources/articles/dsl/crud-rest-sb2-hibernate.html
+
+
+INTELIJ Atalhos
+https://www.youtube.com/watch?v=K4UNP1ZjftQ
+1) CTRL + ALT + L -> Identação
+2) Shift Shift (procurar algo no projeto)
+3) Alt + 1 (munimuiza a aba project, ganhando espaço na tela ao programar)
+4) Alt + INSERT (abre as opções de novo arquivo ou pasta)
+5) sout e psvm
+6) CTRL + Espaço (visualiza opções de SALT)
+7) CTRL + D (duplica a linha)
+8) CTRL + SHITF + F10 (primeira execução)
+9) SHIFT + F10 (executar o código normalmente)
+10) new Interge (30); depois clica CTRL + ALT + V (cria a variavel)
+11) CTRL + ALT + < (volta onde o cursor estava anteriormente)
+11) CTRL + ALT + > (avança para onde o cursor estava anteriormente)
+12) ALT + INSERT (com foco na classe dá opções de criação de código)
+13) CTRL + ALT + O (remove o import que não esta sendo utilizado)
+14) CTRL + B (Move o cursos para onde a variavel foi criada)
+15) CTRL + F4 (fecha aba)
+16) ALT + F7 (Encontra todo mundo que usa a variavel ou classe selecionada)
+17) CTRL + ALT + M (Criar um novo método com ass linhas selecionadas, facade)
+18) SHIFT + F6 (Ao mudar um nome a IDE muda todas as referencias)
+19) CTRL + N (Busca classes em todo o projeto)
+20) CTRL + SHIFT + N (procurar arquivos (e pastas) em todo o projeto)
+21) CTRL + SHIFT + A (procura por ações, descobrir atalhos)
+22) 
+
+
+Relacionamentos JPA
+1) https://www.youtube.com/watch?v=ODXvvEzXlQY 
+
+
+Especificação Hibernate
+https://docs.jboss.org/hibernate/annotations/3.5/reference/en/html_single/
+
+Validação em Spring Boot
+***API ERROR Validação - https://www.baeldung.com/global-error-handler-in-a-spring-rest-api
+
+
+1) Implementação -> https://www.baeldung.com/spring-boot-bean-validation
+2) Tipos de validação > https://www.baeldung.com/exception-handling-for-rest-with-spring
+3) https://www.youtube.com/watch?v=pjA9Pc7aTic
+4) https://www.javatips.net/api/REST-With-Spring-master/common/src/main/java/org/baeldung/common/web/RestResponseEntityExceptionHandler.java
+5) https://github.com/eugenp/tutorials/tree/master/spring-boot-rest/src/main/java/com/baeldung/web/error
+
+Hibernate Validator
+http://www.rondinha.rs.leg.br/restrito/upload/concursospublicos/3.pdf
+
+
+}
+
+
+
+}

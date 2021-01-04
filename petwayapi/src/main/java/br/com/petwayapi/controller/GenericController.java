@@ -7,9 +7,15 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +53,7 @@ public abstract class GenericController<T, ID extends Serializable> {
     
 
     @RequestMapping(method=RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
-    public @ResponseBody T create(@RequestBody T json) {
+    public @ResponseBody T create(@Valid @RequestBody T json) {
     	logger.debug("create() with body {} of type {}", json, json.getClass());
 
         T created = this.repo.save(json);
@@ -71,7 +77,7 @@ public abstract class GenericController<T, ID extends Serializable> {
     }
     
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public @ResponseBody T update(@PathVariable ID id, @RequestBody T json) {
+    public @ResponseBody T update(@PathVariable ID id, @Valid @RequestBody T json) {
     	
     	logger.debug("update() of id#{} with body {}", id, json);
         logger.debug("T json is of type {}", json.getClass());
@@ -94,6 +100,5 @@ public abstract class GenericController<T, ID extends Serializable> {
         
         return updated;
     }
-    
-       
+
 }

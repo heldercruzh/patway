@@ -1,63 +1,33 @@
 package br.com.petwayapi.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+import lombok.Data;
+
+@Data
 @Entity
-@Table(name = "municipio")
 public class Municipio {
 
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
+	@NotBlank(message = "O código do município é obrigatório")
 	@Column(nullable = false)
 	private String codigoIbge;
-	
+
+	@NotBlank(message = "O nome do município é obrigatório")
 	@Column(nullable = false)
 	private String nomeMunicipio;
-	
-	@ManyToOne(targetEntity = Uf.class)
-	@JoinColumn(name = "ufId")
+
+	@Valid
+	@NotNull(message = "A Uf é obrigatória")
+	@ManyToOne
+	@JoinColumn(name = "uf_id")
 	private Uf uf;
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
-
-	public String getCodigoIbge() {
-		return codigoIbge;
-	}
-
-	public void setCodigoIbge(String codigoIbge) {
-		this.codigoIbge = codigoIbge;
-	}
-
-	public String getNomeMunicipio() {
-		return nomeMunicipio;
-	}
-
-	public void setNomeMunicipio(String nomeMunicipio) {
-		this.nomeMunicipio = nomeMunicipio;
-	}
-
-	public Uf getUf() {
-		return uf;
-	}
-
-	public void setUf(Uf uf) {
-		this.uf = uf;
-	}
-		
 }

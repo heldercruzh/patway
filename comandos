@@ -1,0 +1,124 @@
+####### Criar ambiente ########
+
+Chrome
+
+->link: https://programadoresbrasil.com.br/2020/05/google-chrome-ubuntu-como-instalar/
+1) wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+2) sudo apt install ./google-chrome-stable_current_amd64.deb
+
+-> Visual Studio Code
+
+link: https://pplware.sapo.pt/linux/microsoft-visual-studio-code-ubuntu/
+1) sudo snap install code --classic
+2) instalar extenção do docker
+
+-> Eclipse (Lombok -> https://projectlombok.org/p2)
+1) sudo apt install default-jre
+2) sudo snap install --classic eclipse
+3) eclipse 2019-03 from Snapcrafters installed
+
+-> Docker
+1) sudo apt update
+2) sudo apt install apt-transport-https ca-certificates curl software-properties-common
+3) curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+4) sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+5) sudo apt update
+6) apt-cache policy docker-ce
+7) sudo apt install docker-ce
+
+GIT
+1) sudo apt-get install git-all
+
+Postgres
+https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart-pt
+
+1) sudo apt update
+2) sudo apt install postgresql postgresql-contrib
+
+
+Criar senha
+1) sudo su
+2) psql
+3) CREATE USER nomedousuario SUPERUSER INHERIT CREATEDB CREATEROLE; 
+4) ALTER USER nomedousuario PASSWORD 'senha'; 
+
+
+pgAdmin4
+https://computingforgeeks.com/how-to-install-pgadmin-4-on-ubuntu/
+
+1) sudo apt update
+2) sudo apt install pgadmin4 pgadmin4-apache2
+
+Montar ambiente do projeto
+
+GIT COMANDs
+…or create a new repository on the command line
+echo "# petway" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/heldercruzh/petway.git
+git push -u origin main
+                
+…or push an existing repository from the command line
+git remote add origin https://github.com/heldercruzh/petway.git
+git branch -M main
+git push -u origin main
+
+Postman
+sudo snap install postman
+
+Instalar Java 8
+1) download - https://www.java.com/pt-BR/download/
+2) tar zxvf jre-8u271-linux-x64.tar.gz
+
+Node
+1) apt-get install -y nodejs
+2) apt install npm
+
+
+
+
+Instalar Node
+
+####### Comandos linux ########
+
+Relacionamentos
+https://www.youtube.com/watch?v=ODXvvEzXlQY
+
+Lombok-Eclipse
+
+1) https://projectlombok.org/setup/eclipse
+Help -> Install New Software -> https://projectlombok.org/p2
+
+2) https://medium.com/collabcode/projeto-lombok-escrevendo-menos-c%C3%B3digo-em-java-8fc87b379209
+
+
+Instalar intellij
+https://www.vivaolinux.com.br/dica/Instalar-a-IDE-Java-IntelliJ-IDEA
+1) sudo snap install intellij-idea-ultimate --classic
+
+
+Postgres
+
+Deleção forçada
+1) SELECT pg_terminate_backend(pg_stat_activity.pid)
+FROM pg_stat_activity
+WHERE pg_stat_activity.datname = 'petwaydb';
+
+Drop database petwaydb;
+
+Create database petwaydb;
+
+Spotfy
+1) snap install spotify
+
+
+
+
+
+
+ATALHOS
+
+Ctrl+Alt+T (Abrir terminal)

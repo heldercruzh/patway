@@ -1,30 +1,38 @@
 begin transaction;
 
-INSERT INTO public.uf(
+INSERT INTO uf(
 	id, nome, uf)
 	VALUES (1,'Distrito Federal', 'DF');
 	
-INSERT INTO public.uf(
+INSERT INTO uf(
 	id, nome, uf)
 	VALUES (2,'Goias', 'GO');
 	
-INSERT INTO public.municipio(
+ALTER SEQUENCE uf_id_seq START WITH 3;
+	
+INSERT INTO municipio(
 	id, codigo_ibge, nome_municipio, uf_id)
 	VALUES (1, '00000000', 'Brasilia', 1);
 	
-INSERT INTO public.municipio(
+INSERT INTO municipio(
 	id, codigo_ibge, nome_municipio, uf_id)
 	VALUES (2, '00000002', 'Goiania', 2);
 
-INSERT INTO public.perfil(
+ALTER SEQUENCE municipio_id_seq START WITH 3;
+
+INSERT INTO perfil(
 	id, name)
 	VALUES (1, 'Administrador');
 	
-INSERT INTO public.usuario(
+ALTER SEQUENCE perfil_id_seq START WITH 2;
+	
+INSERT INTO usuario(
 	id, email, senha, token, perfil_id)
 	VALUES (1, 'heldercruzh@gmail.com', '123', null, 1);
 
-INSERT INTO public.pessoa(
+ALTER SEQUENCE usuario_id_seq START WITH 2;
+
+INSERT INTO pessoa(
 	bairro, 
 	celular, 
 	cep, 
@@ -33,7 +41,7 @@ INSERT INTO public.pessoa(
 	data_nascimento, 
 	endereco, 
 	genero, 
-	nome, numero, rg, telefone, municipio_id, ssp, usuario_id)
+	nome, numero, rg, telefone, municipio_id, ssp_id, usuario_id)
 	VALUES (
 		'Sobradinho 2', 
 		'61984251001', 
@@ -51,8 +59,10 @@ INSERT INTO public.pessoa(
 		2, 
 	    1);
 	
-	
-commit
+ALTER SEQUENCE pessoa_id_seq START WITH 2;
 
-rollback
+/*commit*/
+
+/*rollback*/
+
 

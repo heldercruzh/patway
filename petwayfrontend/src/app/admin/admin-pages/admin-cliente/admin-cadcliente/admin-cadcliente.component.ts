@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -14,6 +14,7 @@ import { Municipio } from '../../../../shared/models/municipio';
 import { MunicipioService } from '../../../../shared/services/municipio.service';
 import { Observable } from 'rxjs';
 import { Perfil } from 'src/app/shared/models/perfil';
+import { setOffsetToUTC } from 'ngx-bootstrap/chronos/units/offset';
 
 @Component({
   selector: 'app-admin-cadcliente',
@@ -23,7 +24,6 @@ import { Perfil } from 'src/app/shared/models/perfil';
 export class AdminCadclienteComponent implements OnInit {
 
   clienteForm: FormGroup;
-  submitted = false;
   loading = false;
   error = '';   
   ufs: Observable<Uf[]>;
@@ -50,8 +50,9 @@ export class AdminCadclienteComponent implements OnInit {
       private municipioService: MunicipioService,
       private ufService: UfService
   ) { 
+    
     this.newPessoa();
-    this.crateForm();
+    this.createForm();
   }
 
   ngOnInit() {
@@ -65,12 +66,10 @@ export class AdminCadclienteComponent implements OnInit {
          this.pessoaService.read(params['id'])
          .subscribe(
            pessoa => { 
-             this.pessoa = pessoa;            
-             this.crateForm();
-           },
-           error => {
-            this.newPessoa();
-            this.crateForm();
+             this.pessoa = pessoa;
+                        
+             this.editForm();
+             this.municipiosFiltrados = this.municipios.filter((item)=> item.uf.id == pessoa.municipio.uf.id);
            });
       }
     );
@@ -81,8 +80,6 @@ export class AdminCadclienteComponent implements OnInit {
   get f() { return this.clienteForm.controls; }
 
   onSubmit() {
-
-      this.submitted = true;  
 
       // para aqui se o formulário for inválido
       if (this.clienteForm.invalid) {  
@@ -95,44 +92,65 @@ export class AdminCadclienteComponent implements OnInit {
 
       this.loading = true;
       
-      this.usuarioService.save(this.clienteForm.value.usuario)
-      .pipe(first())
-      .subscribe(
-      resUsuario => {
-            this.f.usuario.get('idUsuario').setValue(resUsuario.id);
+      
             
-            console.log(this.clienteForm.value);
-            
-            this.pessoaService.save(this.clienteForm.value)
-            .pipe(first())
-            .subscribe(
-              retornoPessoa => {
-                  this.modal.showAlertSuccess("Dados salvo com sucesso!!");
-                  //this.router.navigate(['/listcliente']);
+      this.pessoaService.save(this.clienteForm.value)
+          .pipe(first())
+          .subscribe(
+            retornoPessoa => {
+              this.newPessoa();
+              this.createForm();
+              this.modal.showAlertSuccess("Dados salvo com sucesso!!");
+              //this.router.navigate(['/listcliente']);
               },
-              error => {
-                  this.crateForm();
-                  this.modal.showAlertDanger(error + " pessoa");
-              });
-
-       },
-       error => {
-          this.crateForm();
-          this.modal.showAlertDanger(error + " uf");
-       });       
-  }
+            error => {                  
+                this.modal.showAlertDanger(error + " pessoa");
+            });
+          }
+       
 
  
-  private crateForm () {
+  private editForm () {
     this.clienteForm = this.formBuilder.group({
         id: [this.pessoa.id],
         nome: [this.pessoa.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
         dataNascimento: [this.pessoa.dataNascimento, [Validators.required]], //Validators.pattern('^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-][0-9]{4}$')]],
         genero: [this.pessoa.genero, Validators.required],
         usuario: this.formBuilder.group({
-          idUsuario: [this.usuario.id],
+          id: [this.pessoa.usuario.id],
+          email: [this.pessoa.usuario.email, [Validators.required, Validators.pattern('^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.?/?([a-z]+)?$')]],
+          senha: [this.pessoa.usuario.senha, Validators.required],
+          perfil: [this.pessoa.usuario.perfil]
+        }),        
+        telefone: [this.pessoa.telefone, [Validators.required, Validators.pattern('^(\\([0-9]{2}\\))\\s([9]{1})?([0-9]{4})-([0-9]{4})$')]],
+        celular: [this.pessoa.celular, [Validators.required, Validators.pattern('^(\\([0-9]{2}\\))\\s([9]{1})?([0-9]{4})-([0-9]{4})$')]],
+        cpf: [this.pessoa.cpf, [Validators.required, Validators.pattern('^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}')]],
+        rg: [this.pessoa.rg, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+        ssp: this.formBuilder.group({
+          id: [this.pessoa.ssp.id, Validators.required]
+        }),
+        cep: [this.pessoa.cep, [Validators.required, Validators.pattern('[0-9]{2}.[0-9]{3}-[0-9]{3}')]],
+        bairro: [this.pessoa.bairro, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]], 
+        uf: [this.pessoa.municipio.uf.id, Validators.required],
+        municipio: this.formBuilder.group({
+          id: [this.pessoa.municipio.id, Validators.required] 
+        }),
+        endereco: [this.pessoa.endereco, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+        numero: [this.pessoa.numero, [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
+        complemento: [this.pessoa.complemento]
+    });
+    this.loading = false;
+  }
+
+  private createForm() {
+    this.clienteForm = this.formBuilder.group({
+        id: [this.pessoa.id],
+        nome: [this.pessoa.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+        dataNascimento: [this.pessoa.dataNascimento, [Validators.required]], //Validators.pattern('^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-][0-9]{4}$')]],
+        genero: [this.pessoa.genero, Validators.required],
+        usuario: this.formBuilder.group({
+          id: [this.usuario.id],
           email: [this.usuario.email, [Validators.required, Validators.pattern('^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.?/?([a-z]+)?$')]],
-          confirmarsenha: ['', Validators.required],
           senha: [this.usuario.senha, Validators.required],
           perfil: [this.usuario.perfil]
         }),        
@@ -141,13 +159,13 @@ export class AdminCadclienteComponent implements OnInit {
         cpf: [this.pessoa.cpf, [Validators.required, Validators.pattern('^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}')]],
         rg: [this.pessoa.rg, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
         ssp: this.formBuilder.group({
-          idSSP: [this.ssp.id, Validators.required]
+          id: [this.ssp.id, Validators.required]
         }),
         cep: [this.pessoa.cep, [Validators.required, Validators.pattern('[0-9]{2}.[0-9]{3}-[0-9]{3}')]],
         bairro: [this.pessoa.bairro, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]], 
-        uf: [this.municipio.uf.id, Validators.required],
+        uf: ['', Validators.required],
         municipio: this.formBuilder.group({
-          idMunicipio: [this.municipio.id, Validators.required] 
+          id: [this.municipio.id, Validators.required] 
         }),
         endereco: [this.pessoa.endereco, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
         numero: [this.pessoa.numero, [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
@@ -155,6 +173,7 @@ export class AdminCadclienteComponent implements OnInit {
     });
     this.loading = false;
   }
+
 
   newPessoa(){
     
@@ -196,6 +215,7 @@ export class AdminCadclienteComponent implements OnInit {
   }
 
   buscarMunicipiosPorUF(id:number){
+    this.clienteForm.get('municipio').get('id').setValue(null);
     this.municipiosFiltrados = this.municipios.filter((item)=> item.uf.id == id);
   }
 
