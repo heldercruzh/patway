@@ -6,4 +6,5 @@ import br.com.petwayapi.models.Pessoa;
 
 public interface PessoaRepository extends JpaRepository<Pessoa, Long>{
 
+
 }

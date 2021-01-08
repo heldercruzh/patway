@@ -39,20 +39,20 @@ public abstract class GenericController<T, ID extends Serializable> {
         this.repo = repo;
     }
 
-    @RequestMapping(method=RequestMethod.GET)
+    @RequestMapping(method=RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody List<T> listAll() {
     	Iterable<T> all = this.repo.findAll();
         return Lists.newArrayList(all);
         
     }
     
-    @RequestMapping(value="/{id}", method=RequestMethod.GET)
+    @RequestMapping(value="/{id}", method=RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody T get(@PathVariable ID id) {
         return this.repo.findById(id).get();
     }
     
 
-    @RequestMapping(method=RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE})
+    @RequestMapping(method=RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE}, produces={MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody T create(@Valid @RequestBody T json) {
     	logger.debug("create() with body {} of type {}", json, json.getClass());
 
@@ -76,7 +76,7 @@ public abstract class GenericController<T, ID extends Serializable> {
           
     }
     
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
+    @RequestMapping(value="/{id}", method=RequestMethod.PUT, consumes={MediaType.APPLICATION_JSON_VALUE}, produces={MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody T update(@PathVariable ID id, @Valid @RequestBody T json) {
     	
     	logger.debug("update() of id#{} with body {}", id, json);
