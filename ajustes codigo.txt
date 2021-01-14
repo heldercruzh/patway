@@ -68,8 +68,53 @@ Hibernate Validator
 http://www.rondinha.rs.leg.br/restrito/upload/concursospublicos/3.pdf
 
 
+Testador de REGEX
+1) https://regexr.com/
+
+Swagger 
+1) https://github.com/wladimilson/springbootapi
+1) https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api
+2) https://www.treinaweb.com.br/blog/documentando-uma-api-spring-boot-com-o-swagger/
+3) Especificação - https://swagger.io/docs/specification/2-0/
+
+caminhos: 
+http://localhost:8080/swagger-ui/
+http://localhost:8080/v2/api-docs           
+               
+               
+               <dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+JWT
+1) https://medium.com/rapaduratech/criando-um-token-jwt-para-autentica%C3%A7%C3%A3o-em-spring-boot-371ccb54a093
+
+
+ {    
+    "username": "a@g.c",
+    "password": "123"
 }
 
+Start do Spring Boot
+1) https://start.spring.io/
+
+Teste unitário com JUNIT
+1) https://spring.io/guides/gs/testing-web/
+2) https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockmvc-example/
+3) Migrar do 4 para o 5 - https://www.baeldung.com/junit-5-runwith
 
 
-}
+
+

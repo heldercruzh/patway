@@ -97,7 +97,8 @@ Help -> Install New Software -> https://projectlombok.org/p2
 
 Instalar intellij
 https://www.vivaolinux.com.br/dica/Instalar-a-IDE-Java-IntelliJ-IDEA
-1) sudo snap install intellij-idea-ultimate --classic
+1) sudo snap install intellij-idea-community --classic
+2) sudo snap refresh intellij-idea-community
 
 
 Postgres
