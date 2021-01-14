@@ -2,7 +2,6 @@ package br.com.petwayapi.models;
 
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 import io.swagger.annotations.ApiModelProperty;

@@ -10,14 +10,14 @@ import lombok.Data;
 @Entity
 public class Perfil {
 
-	@ApiModelProperty(value = "Identificador do perfil")
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    @ApiModelProperty(value = "Identificador do perfil")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	@ApiModelProperty(value = "Nome do município")
-	@NotBlank(message = "O nome do perfil é obrigatório")
-	@Column(nullable = false)
-	private String name;
+    @ApiModelProperty(value = "Nome do município")
+    @NotBlank(message = "O nome do perfil é obrigatório")
+    @Column(nullable = false)
+    private String name;
 
 }

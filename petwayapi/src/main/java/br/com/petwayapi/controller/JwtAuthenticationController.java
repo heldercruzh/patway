@@ -1,5 +1,10 @@
 package br.com.petwayapi.controller;
 
+import br.com.petwayapi.models.JwtRequest;
+import br.com.petwayapi.models.Usuario;
+import br.com.petwayapi.repository.UsuarioRepository;
+import br.com.petwayapi.security.JwtTokenUtil;
+import br.com.petwayapi.service.JwtUserDetailsService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -16,11 +21,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.petwayapi.security.JwtTokenUtil;
-import br.com.petwayapi.models.JwtRequest;
-import br.com.petwayapi.models.Usuario;
-import br.com.petwayapi.repository.UsuarioRepository;
-import br.com.petwayapi.service.JwtUserDetailsService;
 
 @ApiOperation(value = "Gera o Token")
 @ApiResponses(value = {

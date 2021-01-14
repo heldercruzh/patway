@@ -1,6 +1,5 @@
 package br.com.petwayapi.controller;
 
-import br.com.petwayapi.models.Usuario;
 import br.com.petwayapi.repository.UsuarioRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;

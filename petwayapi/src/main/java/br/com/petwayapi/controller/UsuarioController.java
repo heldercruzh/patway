@@ -1,12 +1,12 @@
 package br.com.petwayapi.controller;
 
+import br.com.petwayapi.models.Usuario;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import br.com.petwayapi.models.Usuario;
 import br.com.petwayapi.repository.UsuarioRepository;
 
 
