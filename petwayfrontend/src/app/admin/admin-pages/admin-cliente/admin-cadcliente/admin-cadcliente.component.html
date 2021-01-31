@@ -90,7 +90,7 @@
         <div class="col-md-1 mb-3" formGroupName="ssp">
            <label for="ssp">*SSP:</label>
            <select id="ssp" formControlName="id" class="form-control" 
-           [ngClass]="{ 'is-invalid': f.ssp.invalid && (submitted || f.ssp.dirty || f.ssp.touched)}">
+           [ngClass]="{ 'is-invalid': f.ssp.invalid && (f.ssp.dirty || f.ssp.touched)}">
             <option [value]=null disabled>--</option>
             <option *ngFor="let ssp of ufs | async" value= {{ssp.id}}> {{ssp.uf}} </option>
            </select>
@@ -163,7 +163,7 @@
         <div class="col-md-6 mb-3">
           <label for="rg">Complemento:</label>
           <input type="text" formControlName="complemento" id="complemento" class="form-control" 
-            [ngClass]="{ 'is-invalid': submitted && f.complemento.errors }" />
+            [ngClass]="{ 'is-invalid': f.complemento.errors }" />
         </div>
       </div>
       <div formGroupName="usuario">

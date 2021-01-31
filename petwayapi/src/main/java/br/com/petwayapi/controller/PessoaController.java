@@ -90,6 +90,7 @@ public class PessoaController extends GenericController<Pessoa, Long> {
             return null;
         }
 
+
         String encodedPassword = new BCryptPasswordEncoder().encode(json.getUsuario().getSenha());
         json.getUsuario().setSenha(encodedPassword);
 

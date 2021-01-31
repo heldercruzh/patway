@@ -25,6 +25,7 @@ export class AdminCadclienteComponent implements OnInit {
 
   clienteForm: FormGroup;
   loading = false;
+
   error = '';   
   ufs: Observable<Uf[]>;
   municipios: Municipio[];
@@ -76,7 +77,7 @@ export class AdminCadclienteComponent implements OnInit {
     
   }
 
-  // usado para facilitar o acesso aos campo do formulário
+  // usado para facilitar o acesso aos camponpmjs.com/package/ do formulário
   get f() { return this.clienteForm.controls; }
 
   onSubmit() {

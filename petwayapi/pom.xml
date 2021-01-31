@@ -107,12 +107,32 @@
 			<artifactId>jjwt</artifactId>
 			<version>0.9.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>3.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>3.0</version>
+
+				<configuration>
+					<user>postgres</user>
+					<password>root</password>
+					<url>jdbc:postgresql://localhost\:5432/petwaydb</url>
+					<locations>
+						<location>filesystem:src/main/resources/migrations</location>
+					</locations>
+					<skip>false</skip>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

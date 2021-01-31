@@ -1,17 +1,16 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AdminCadclienteComponent } from './admin-cadcliente.component';
+
 
 describe('AdminCadclienteComponent', () => {
   let component: AdminCadclienteComponent;
   let fixture: ComponentFixture<AdminCadclienteComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+     
       declarations: [ AdminCadclienteComponent ]
     })
-    .compileComponents();
-  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AdminCadclienteComponent);
@@ -22,4 +21,6 @@ describe('AdminCadclienteComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+});
+
 });

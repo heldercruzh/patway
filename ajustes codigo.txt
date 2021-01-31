@@ -115,6 +115,10 @@ Teste unitário com JUNIT
 2) https://howtodoinjava.com/spring-boot2/testing/spring-boot-mockmvc-example/
 3) Migrar do 4 para o 5 - https://www.baeldung.com/junit-5-runwith
 
+Angular mudança de versao
+1) https://fluin.io/blog/property-has-no-initializer-and-is-not-definitely-assigned
 
+Error: EACCES: permission denied, mkdir '/home/helder/myprojects/petway/frontend/node_modules/1) ngx-bootstrap/__ivy_ngcc__/dropdown'
+sudo npm install -g --unsafe-perm --verbose @angular/cli
 
 

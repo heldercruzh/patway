@@ -29,6 +29,7 @@ import { ModalModule, BsModalRef } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,9 +46,9 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    TextMaskModule,    
     HttpClientModule,
     BrowserAnimationsModule,
+    TextMaskModule, 
     BsDropdownModule.forRoot(),
     CollapseModule.forRoot(),
     TooltipModule.forRoot(),
