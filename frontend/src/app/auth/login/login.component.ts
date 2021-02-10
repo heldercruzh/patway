@@ -1,152 +1,89 @@
-/*import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../auth.service';
-import { User } from '../user.model';
-import { AlertModalService } from '../../shared/alert-modal.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-
-@Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
-})
-
-// inserir autenticação com Auth ou JWT
-export class LoginComponent implements OnInit {
-
-  form: FormGroup;
-
-  user: User = {
-    id: 0,
-    email: '',
-    password: '',
-    profile: null
-  };
-
- constructor(
-      private router: Router,
-      private authService: AuthService,
-      private modal: AlertModalService
-      ) { }
-
-  ngOnInit(): void {
-    this.form = new FormGroup({
-      email: new FormControl(null, Validators.required),
-      password: new FormControl(null, Validators.required),
-      captcha: new FormControl(null, Validators.required)
-    });
-
-  }
-
-
-    login(): void {
-
-        const val = this.form.value;
-
-        if (val.email && val.password) {
-          this.authService.login(val.email, val.password)
-              .subscribe(
-                  () => {
-                      console.log('User is logged in');
-                      this.router.navigateByUrl('/');
-                  }
-              );
-          }
-
-    }
-
-
-    loginUser(): void {
-      this.authService.isAutenticated(this.user).subscribe(
-        returnJson => {
-          if (returnJson.success) {
-            this.authService.setLoggedIn(true);
-            this.router.navigate(['/admin']);
-          } else {
-            this.authService.setLoggedIn(false);
-            this.modal.showAlertDanger(returnJson.message);
-            console.log(returnJson.message);
-          }
-        },
-        err => {
-          this.modal.showAlertDanger('Ocorreu um erro! tente novamente');
-          console.log('Error Getting Location: ', err);
-        }
-      );
-    }
-}*/
-
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { TokenStorageService } from '../helpers/token-storage.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
-import { AuthService } from '../auth.service';
 import { AlertModalService } from '../../shared/alert-modal.service';
-import { Usuario } from '../../shared/models/usuario';
+import { SocialAuthService } from "angularx-social-login";
+import { FacebookLoginProvider, GoogleLoginProvider, VKLoginProvider } from "angularx-social-login";
+import { SocialUser } from "angularx-social-login";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = this.formBuilder.group({});
   loading = false;
   submitted = false;
-  returnUrl: string = '';
-  error = '';
+  isLoginFailed = false;
+  roles: string[] = [];
 
-  constructor(
-      private formBuilder: FormBuilder,
-      private route: ActivatedRoute,
-      private router: Router,
-      private authService: AuthService,
-      private modal: AlertModalService
-  ) {
-      // redirect to home if already logged in
-      if (this.authService.currentUserValue) {
-          this.router.navigate(['/']);
-      }
-  }
+  socialUser?: SocialUser;
+  loggedIn= false;
+  
+  constructor (
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private modal: AlertModalService,
+    private authService: AuthService,
+    private tokenStorage: TokenStorageService,
+    private socialAuthService: SocialAuthService
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+
+    this.socialAuthService.authState.subscribe((socialUser) => {
+      this.socialUser = socialUser;
+      this.loggedIn = (socialUser != null);
+    });
+
     this.clearForm();
-
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    
+    if (this.tokenStorage.getToken()) {
+      this.loggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
+    }
   }
 
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
-  onSubmit() {
-      this.submitted = true;
+  onSubmit(): void {
+    
+    this.submitted = true;
+    
+    // stop here if form is invalid
+    if (this.loginForm.invalid) {
+      return;
+    }
 
-      // stop here if form is invalid
-      if (this.loginForm.invalid) {
-          return;
+    this.loading = true;
+   
+    this.authService.login(this.f.email.value, this.f.senha.value).subscribe(
+      data => {
+        this.tokenStorage.saveToken(data.token || '');
+        this.tokenStorage.saveUser(data);
+        this.isLoginFailed = false;
+        this.loggedIn = true;
+        this.roles = this.tokenStorage.getUser().roles;
+        this.reloadPage();
+      },
+      err => {
+        this.isLoginFailed = true;
+        this.clearForm();
+        this.modal.showAlertDanger(err.error.message);
       }
-
-      this.loading = true;
-      this.authService.login(this.f.email.value, this.f.senha.value)
-          .pipe(first())
-          .subscribe(
-              //data => {
-                  this.router.navigate([this.returnUrl])
-              /*},
-              error => {
-                  this.clearForm();
-                  this.modal.showAlertDanger(error);
-              }*/);
+    );
   }
-
+ 
   private clearForm(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       senha: ['', Validators.required],
-      rememberme: ['']//,
-      //captcha: ['', Validators.required]
+      rememberme: [''],
+      captcha: ['', Validators.required]
     });
     this.loading = false;
     this.submitted = false;
@@ -158,5 +95,17 @@ export class LoginComponent implements OnInit {
 
   public goForgetPassword(): void {
     this.router.navigate(['/forgetpassword']);
+  }
+
+  private reloadPage(): void {
+    window.location.reload();
+  }
+
+  public signInWithGoogle(): void {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+  }
+
+  public signInWithFB(): void {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID);
   }
 }

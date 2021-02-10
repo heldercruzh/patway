@@ -26,9 +26,9 @@ export class ForgetpasswordComponent implements OnInit {
       private modal: AlertModalService
   ) {
       // redirect to home if already logged in
-      if (this.authService.currentUserValue) {
+      /*if (this.authService.currentUserValue) {
           this.router.navigate(['/']);
-      }
+      }*/
 
       this.clearForm();
 

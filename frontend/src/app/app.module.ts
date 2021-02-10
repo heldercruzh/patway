@@ -34,8 +34,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConfirmModalComponent } from './shared/confirm-modal/confirm-modal.component';
 import { AlertModalComponent } from './shared/alert-modal/alert-modal.component';
 import { SharedModule } from './shared/shared.module';
+import { authInterceptorProviders } from './auth/helpers/auth.interceptor';
 
-
+// To use captcha
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 @NgModule({
   declarations: [
@@ -67,8 +69,11 @@ import { SharedModule } from './shared/shared.module';
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
     TextMaskModule,
-    SharedModule
+    SharedModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
+  providers: [authInterceptorProviders],
   bootstrap: [ AppComponent ],
   entryComponents: [ ConfirmModalComponent, AlertModalComponent ]
 })

@@ -24,16 +24,12 @@ export class ClienteCadComponent implements OnInit {
 
   clienteForm: FormGroup = this.formBuilder.group({});
   loading = false;
-
+  submitted = false;
   error: string = '';   
   ufs: Observable<Uf[]> = new Observable;
   municipios: Municipio[] = [new Municipio];
   municipiosFiltrados?: Municipio[];
-  pessoa: Pessoa = new Pessoa;
-  usuario: Usuario = new Usuario;
-  ssp: Uf = new Uf;
-  municipio: Municipio = new Municipio;
-  perfil: Perfil = new Perfil;
+  pessoa: Pessoa;
    
   public telefoneMask = ['(', /\d/, /\d/, ')', ' ', /\d/,/\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   public dataMask = [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/];
@@ -51,8 +47,10 @@ export class ClienteCadComponent implements OnInit {
       private ufService: UfService
   ) { 
     
-    this.newPessoa();
+    this.pessoa = new Pessoa();
+    
     this.createForm();
+    
   }
 
   ngOnInit() {
@@ -60,7 +58,8 @@ export class ClienteCadComponent implements OnInit {
     this.listarUfs();
 
     this.listarMunicipios();
-    /*
+
+    
     this.route.params.subscribe(
       (params: any) => {
          this.pessoaService.read(params['id'])
@@ -68,11 +67,11 @@ export class ClienteCadComponent implements OnInit {
            pessoa => { 
              this.pessoa = pessoa;
                         
-             this.editForm();
-             this.municipiosFiltrados = this.municipios.filter((item)=> item.uf.id == pessoa.municipio.uf.id);
+             this.createForm();
+             this.municipiosFiltrados = this.municipios.filter((item)=> item.uf?.id == pessoa.municipio?.uf?.id);
            });
       }
-    );*/
+    );
     
   }
 
@@ -80,119 +79,67 @@ export class ClienteCadComponent implements OnInit {
   get f() { return this.clienteForm.controls; }
   
   
+  
   onSubmit() {
-
-      console.log("t1 - "+this.pessoa.usuario.id);
-      
-      console.log(this.clienteForm.value);
-
-      /*
+    
+      this.submitted = true;
+    
       // para aqui se o formulário for inválido
       if (this.clienteForm.invalid) {  
-          console.log('formulario inválido');
-          return;
-      }*/
-
+        console.log('formulario inválido');
+        return;
+      }
+  
       this.loading = true;
-      
-      
+     
+      this.pessoaService.save(this.clienteForm.value).subscribe(
+        data => {
+            this.createForm();
+            this.modal.showAlertSuccess("Dados salvo com sucesso!!");
+            //this.router.navigate(['/listcliente']);
+        },
+        err => {
+          this.modal.showAlertDanger(err.error.message);
+        }
+      ); 
             
-      this.pessoaService.save(this.clienteForm.value)
-          .pipe(first())
-          .subscribe(
-            retornoPessoa => {
-              this.newPessoa();
-              this.createForm();
-              this.modal.showAlertSuccess("Dados salvo com sucesso!!");
-              //this.router.navigate(['/listcliente']);
-              },
-            error => {                  
-    //            this.modal.showAlertDanger(error + " pessoa");
-            });
-          }
-       
+  }
+   
+  private createForm () {
+    this.clienteForm = this.formBuilder.group({
+        id: [this.pessoa.id],
+        nome: [this.pessoa.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+        dataNascimento: [this.pessoa.dataNascimento, [Validators.required]], //Validators.pattern('^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-][0-9]{4}$')]],
+        genero: [this.pessoa.genero, Validators.required],
+        usuario: this.formBuilder.group({
+          id: [this.pessoa.usuario?.id || null],
+          email: [this.pessoa.usuario?.email, [Validators.required, Validators.pattern('^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.?/?([a-z]+)?$')]],
+          senha: [this.pessoa.usuario?.senha, Validators.required],
+          perfil: this.formBuilder.group({
+             id: [this.pessoa.usuario?.perfil?.id || 1, Validators.required]
+          }),
+        }),        
+        telefone: [this.pessoa.telefone, [Validators.required, Validators.pattern('^(\\([0-9]{2}\\))\\s([9]{1})?([0-9]{4})-([0-9]{4})$')]],
+        celular: [this.pessoa.celular, [Validators.required, Validators.pattern('^(\\([0-9]{2}\\))\\s([9]{1})?([0-9]{4})-([0-9]{4})$')]],
+        cpf: [this.pessoa.cpf, [Validators.required, Validators.pattern('^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}')]],
+        rg: [this.pessoa.rg, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+        ssp: this.formBuilder.group({
+          id: [this.pessoa.ssp?.id || null, Validators.required]
+        }),
+        cep: [this.pessoa.cep, [Validators.required, Validators.pattern('[0-9]{2}.[0-9]{3}-[0-9]{3}')]],
+        bairro: [this.pessoa.bairro, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]], 
+        uf: [this.pessoa.municipio?.uf?.id || null, Validators.required],//[this.pessoa.municipio.uf.id | ''],
+        municipio: this.formBuilder.group({
+          id: [this.pessoa.municipio?.id || null, Validators.required] 
+        }),
+        endereco: [this.pessoa.endereco, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+        numero: [this.pessoa.numero, [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
+        complemento: [this.pessoa.complemento]
+    });
+    this.loading = false;
+  }
 
  
-  private editForm () {
-    this.clienteForm = this.formBuilder.group({
-        id: [this.pessoa.id],
-        nome: [this.pessoa.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-        dataNascimento: [this.pessoa.dataNascimento, [Validators.required]], //Validators.pattern('^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-][0-9]{4}$')]],
-        genero: [this.pessoa.genero, Validators.required],
-        usuario: this.formBuilder.group({
-          id: [this.pessoa.usuario.id],
-          email: [this.pessoa.usuario.email, [Validators.required, Validators.pattern('^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.?/?([a-z]+)?$')]],
-          senha: [this.pessoa.usuario.senha, Validators.required],
-          perfil: [this.pessoa.usuario.perfil]
-        }),        
-        telefone: [this.pessoa.telefone, [Validators.required, Validators.pattern('^(\\([0-9]{2}\\))\\s([9]{1})?([0-9]{4})-([0-9]{4})$')]],
-        celular: [this.pessoa.celular, [Validators.required, Validators.pattern('^(\\([0-9]{2}\\))\\s([9]{1})?([0-9]{4})-([0-9]{4})$')]],
-        cpf: [this.pessoa.cpf, [Validators.required, Validators.pattern('^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}')]],
-        rg: [this.pessoa.rg, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-        ssp: this.formBuilder.group({
-          id: [this.pessoa.ssp.id, Validators.required]
-        }),
-        cep: [this.pessoa.cep, [Validators.required, Validators.pattern('[0-9]{2}.[0-9]{3}-[0-9]{3}')]],
-        bairro: [this.pessoa.bairro, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]], 
-        uf: [this.pessoa.municipio.uf.id, Validators.required],
-        municipio: this.formBuilder.group({
-          id: [this.pessoa.municipio.id, Validators.required] 
-        }),
-        endereco: [this.pessoa.endereco, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-        numero: [this.pessoa.numero, [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
-        complemento: [this.pessoa.complemento]
-    });
-    this.loading = false;
-  }
-
-  private createForm() {
-    this.clienteForm = this.formBuilder.group({
-        id: [this.pessoa.id],
-        nome: [this.pessoa.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-        dataNascimento: [this.pessoa.dataNascimento, [Validators.required]], //Validators.pattern('^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-][0-9]{4}$')]],
-        genero: [this.pessoa.genero, Validators.required],
-        usuario: this.formBuilder.group({
-          id: [this.usuario.id],
-          email: [this.usuario.email, [Validators.required, Validators.pattern('^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.?/?([a-z]+)?$')]],
-          senha: [this.usuario.senha, Validators.required],
-          perfil: [this.usuario.perfil]
-        }),        
-        telefone: [this.pessoa.telefone, [Validators.required, Validators.pattern('^(\\([0-9]{2}\\))\\s([9]{1})?([0-9]{4})-([0-9]{4})$')]],
-        celular: [this.pessoa.celular, [Validators.required, Validators.pattern('^(\\([0-9]{2}\\))\\s([9]{1})?([0-9]{4})-([0-9]{4})$')]],
-        cpf: [this.pessoa.cpf, [Validators.required, Validators.pattern('^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}')]],
-        rg: [this.pessoa.rg, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-        ssp: this.formBuilder.group({
-          id: [this.ssp.id, Validators.required]
-        }),
-        cep: [this.pessoa.cep, [Validators.required, Validators.pattern('[0-9]{2}.[0-9]{3}-[0-9]{3}')]],
-        bairro: [this.pessoa.bairro, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]], 
-        uf: ['', Validators.required],
-        municipio: this.formBuilder.group({
-          id: [this.municipio.id, Validators.required] 
-        }),
-        endereco: [this.pessoa.endereco, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-        numero: [this.pessoa.numero, [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
-        complemento: [this.pessoa.complemento]
-    });
-    this.loading = false;
-  }
-
-
-  newPessoa(){
-    
-    this.pessoa = new Pessoa();
-   
-    this.municipio = new Municipio();
-    this.municipio.uf = new Uf();
-    this.ssp = new Uf();
-    this.usuario = new Usuario();
-
-    this.perfil = new Perfil();
-    //fixar o perfil administrador por default
-    this.perfil.id = 1;
-    this.usuario.perfil = this.perfil;
-  }
-
 
   dateMask(event: any) {
     var v = event.target.value;
@@ -218,8 +165,7 @@ export class ClienteCadComponent implements OnInit {
   }
 
   buscarMunicipiosPorUF(id:number){
-    //this.clienteForm.get('municipio').setValue(new Municipio);
-    this.municipiosFiltrados = this.municipios.filter((item)=> item.uf.id == id);
+    this.municipiosFiltrados = this.municipios.filter((item)=> item.uf?.id == id);
   }
 
 }

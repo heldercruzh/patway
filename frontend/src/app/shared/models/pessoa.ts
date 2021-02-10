@@ -1,44 +1,35 @@
 import { Usuario } from './usuario';
+import { Perfil } from './perfil';
 import { Uf } from './uf';
 import { Municipio } from './municipio';
 import { GenericModel } from '../generic.model';
 
 export class Pessoa implements GenericModel {
   id?: number;
-  nome: string;
+  nome?: string;
   usuario: Usuario;
-  cpf: string;
-  rg: string;
+  cpf?: string;
+  rg?: string;
   ssp: Uf;
-  dataNascimento: string;
+  dataNascimento?: string;
   genero?: boolean;
-  telefone: string;
-  celular: string;
-  cep: string;
+  telefone?: string;
+  celular?: string;
+  cep?: string;
   municipio:  Municipio;
-  bairro: string;
-  endereco: string;
-  numero: string;
-  complemento: string;
-  ativo: boolean;
+  bairro?: string;
+  endereco?: string;
+  numero?: string;
+  complemento?: string;
+  ativo?: boolean;
 
-  constructor() {
-    this.nome = '';
-    this.usuario = new Usuario;
-    this.cpf = '';
-    this.rg = '';
-    this.ssp = new Uf;
-    this.dataNascimento ='';
-    this.telefone = '';
-    this.celular = '';
-    this.cep = '';
-    this.municipio = new Municipio;
-    this.bairro = '';
-    this.endereco = '';
-    this.numero = '';
-    this.complemento = '';
-    this.ativo = true;
-
-  }
+ constructor() {
+  
+    this.municipio = new Municipio();
+    this.municipio.uf = new Uf();
+    this.ssp = new Uf();
+    this.usuario = new Usuario();
+  
+ }
 
 }

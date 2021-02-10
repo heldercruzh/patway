@@ -1,4 +1,5 @@
 package br.com.petwayapi.repository;
+
 import br.com.petwayapi.models.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;

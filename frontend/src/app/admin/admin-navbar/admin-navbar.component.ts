@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../../auth/helpers/token-storage.service';
+import { SocialAuthService } from "angularx-social-login";
+
 
 declare interface RouteInfo {
   path: string;
@@ -12,19 +15,20 @@ export const ROUTES: RouteInfo[] = [
   { path: 'cliente-list', title: 'Consultar Clientes',  icon: 'fa-users', class: '' }
 ];
 
-
 @Component({
   selector: 'app-admin-navbar',
   templateUrl: './admin-navbar.component.html',
   styleUrls: ['./admin-navbar.component.css']
 })
 export class AdminNavbarComponent implements OnInit {
-
+  
   public menuItems?: any[];
   public isCollapsed = true;
 
   constructor(
-    private router: Router
+    private router: Router,
+    public tokenStorageService: TokenStorageService,
+    private socialAuthService: SocialAuthService
   ) { }
 
   ngOnInit(): void {
@@ -34,5 +38,11 @@ export class AdminNavbarComponent implements OnInit {
    });
   }
 
+  public logout(): void {
+    this.tokenStorageService.signOut();
+    this.socialAuthService.signOut();
+    window.location.reload();
+    this.router.navigate(['/auth']);
+  }
 
 }

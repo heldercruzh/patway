@@ -4,45 +4,14 @@ import { ReturnJson } from '../shared/return-json';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { GenericModel } from './generic.model';
-import { BehaviorSubject } from 'rxjs';
-import { Usuario } from '../shared/models/usuario';
-
-
-
-
 
 /*
   The "Generic Service" is a class created to provide a default service
   to make easily to create a services for eath object that need
 */
 export class GenericService<T> {
-  constructor(protected http: HttpClient, private serviceEndpoint: string) {
-
-  }
-  
-  protected currentUserSubject: BehaviorSubject<Usuario> = new BehaviorSubject<Usuario>( new Usuario);
-  public currentUser: Observable<Usuario> = new Observable<Usuario>();
-
-  // store user details and jwt token in local storage to keep user logged in between page refreshes
-  protected initToken(usuario: Usuario): void {
-    localStorage.setItem(usuario.token, JSON.stringify(usuario));
-    this.currentUserSubject.next(usuario);
-    this.currentUser = this.currentUserSubject.asObservable();
-  }
-
-  protected clearToken(): void {
-     // remove user from local storage to log user out
-     localStorage.removeItem('');
-     this.currentUserSubject.next(new Usuario);
-     this.currentUser = this.currentUserSubject.asObservable();
-  }
-
-  public get currentUserValue(): Usuario {
-    return this.currentUserSubject.value;
-  }
-
-
-
+  constructor(protected http: HttpClient, private serviceEndpoint: string) { }
+ 
   public remove(id: number): Observable<any> {
       return this.http.delete<ReturnJson>(
         `${environment.apiUrl}/${this.serviceEndpoint}/${id}`).pipe(take(1));

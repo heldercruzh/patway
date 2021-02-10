@@ -1,6 +1,6 @@
 
 <!-- Top navbar -->
-<app-admin-navbar *ngIf="currentUser.id"></app-admin-navbar>
+<app-admin-navbar *ngIf="isLoggedIn"></app-admin-navbar>
 
 <!-- main app container -->
 <div class="container mt-4">
@@ -10,7 +10,4 @@
 </div>
 
  <!-- Footer -->
- <app-admin-footer *ngIf="currentUser.id"></app-admin-footer>
-
- 
- 
+ <app-admin-footer *ngIf="isLoggedIn"></app-admin-footer>

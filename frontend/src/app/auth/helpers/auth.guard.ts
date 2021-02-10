@@ -1,23 +1,13 @@
 import { AuthService } from '../auth.service';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { EMPTY, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
+import { TokenStorageService } from './token-storage.service';
 
 /*
   https://jasonwatmore.com/post/2019/06/22/angular-8-jwt-authentication-example-tutorial
 
-  The auth guard is an angular route guard that's used to prevent unauthenticated users
-  from accessing restricted routes, it does this by implementing the CanActivate
-  interface which allows the guard to decide if a route can be activated with the
-  canActivate() method. If the method returns true the route is activated (allowed
-  to proceed), otherwise if the method returns false the route is blocked.
-
-  The auth guard uses the authentication service to check if the user is logged in,
-  if they are logged in it returns true from the canActivate() method, otherwise it
-  returns false and redirects the user to the login page.
-
-  Angular route guards are attached to routes in the router config, this auth guard is
-  used in app.routing.ts to protect the home page route.
+  https://bezkoder.com/angular-11-jwt-auth/
 */
 
 
@@ -25,18 +15,22 @@ import { EMPTY, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+ 
 
-  constructor(private router: Router, private authService: AuthService) { }
+  isLoggedIn = false;
+  constructor(private router: Router, private authService: AuthService, private tokenStorageService: TokenStorageService) { }
 
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      const currentUser = this.authService.currentUserValue;
-      if (currentUser.id) {
-          // logged in so return true
+      
+      //this.isLoggedIn = !!this.tokenStorageService.getToken();
+      
+      if (this.tokenStorageService.getToken()) { 
           return true;
       }
+      
       // not logged in so redirect to login page with the return url
       this.router.navigate(['/auth'], { queryParams: { returnUrl: state.url } });
       return false;

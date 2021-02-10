@@ -121,4 +121,75 @@ Angular mudança de versao
 Error: EACCES: permission denied, mkdir '/home/helder/myprojects/petway/frontend/node_modules/1) ngx-bootstrap/__ivy_ngcc__/dropdown'
 sudo npm install -g --unsafe-perm --verbose @angular/cli
 
+Cors
+1) https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Controle_Acesso_CORS
 
+Angular JWT 8
+1) https://jasonwatmore.com/post/2019/06/22/angular-8-jwt-authentication-example-tutorial
+
+Angular JWT 11
+2) https://bezkoder.com/angular-11-jwt-auth/
+3) https://github.com/bezkoder/angular-11-jwt-authentication
+
+Sprint boot jwt
+1)https://github.com/bezkoder/spring-boot-spring-security-jwt-authentication
+
+Social Login
+1) https://www.npmjs.com/package/angularx-social-login
+2) https://developers.google.com/identity/sign-in/web/sign-in
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>3.0</version>
+
+				<configuration>
+					<user>postgres</user>
+					<password>root</password>
+					<url>jdbc:postgresql://localhost\:5432/petwaydb</url>
+					<locations>
+						<location>filesystem:src/main/resources/migrations</location>
+					</locations>
+					<skip>false</skip>
+				</configuration>
+			</plugin>
+			
+			
+			
+			
+			
+			<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>3.0</version>
+		</dependency>

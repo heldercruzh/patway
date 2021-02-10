@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { AuthService } from './auth/auth.service';
-import { Usuario } from './shared/models/usuario';
+import { TokenStorageService } from './auth/helpers/token-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -10,21 +8,18 @@ import { Usuario } from './shared/models/usuario';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-    currentUser: Usuario = new Usuario();
-    currentUserId?: number;
-
-    constructor(
-        private router: Router,
-        private authService: AuthService
-    ) {
-        this.authService.currentUser.subscribe(x => this.currentUser =  x);
-
-    }
-
     
+    isLoggedIn = false;
+    
+    constructor(
+      private tokenStorageService: TokenStorageService,
+      private router: Router) { }    
 
-    public logout(): void {
-        this.authService.logout();
-        this.router.navigate(['/auth']);
+    ngOnInit(): void {
+      if(!!this.tokenStorageService.getToken()){
+        this.isLoggedIn = true;
+        this.router.navigate(['/'])
+      }
     }
+    
 }

@@ -87,16 +87,16 @@
                  <div *ngIf="f.rg.errors.minLength || f.rg.errors.maxLength">O RG deve ter entre 3 a 100 caracteres</div>
                </div>
           </div> 
-          <div class="col-md-1 mb-3" formGroupName="ssp">
-             <label for="ssp">*SSP:</label>
-             <select id="ssp" formControlName="id" class="form-control" 
-             [ngClass]="{ 'is-invalid': f.ssp.invalid && (f.ssp.dirty || f.ssp.touched)}">
-              <option [value]=null disabled>--</option>
+          <div class="col-md-3 mb-3" formGroupName="ssp">
+            <label for="ssp">*SSP:</label>
+            <select id="ssp" formControlName="id" class="form-control"
+              [ngClass]="{ 'is-invalid': f.ssp.invalid && (f.ssp.dirty || f.ssp.touched)}">
+              <option [value]=null disabled>--Selecione--</option>
               <option *ngFor="let ssp of ufs | async" value= {{ssp.id}}> {{ssp.uf}} </option>
-             </select>
-             <div *ngIf="f.ssp.invalid  && (f.ssp.dirty || f.ssp.touched)" class="invalid-feedback">
-              <div *ngIf="f.ssp.invalid">O SSP é obrigatório</div>
-            </div>
+            </select>
+            <div *ngIf="f.ssp.invalid && (f.ssp.dirty || f.ssp.touched)" class="invalid-feedback">
+             <div *ngIf="f.ssp.invalid">A SSP é obrigatório</div>
+           </div>
           </div>
         </div>
        <div class="form-row">
@@ -119,7 +119,7 @@
               <div *ngIf="f.uf.invalid && (f.uf.dirty || f.uf.touched)" class="invalid-feedback">
                 <div *ngIf="f.uf.invalid">A UF é obrigatória</div>
               </div>
-           </div>  
+           </div> 
            <div class="col-md-3 mb-3" formGroupName="municipio">
             <label for="municipio">*Município:</label>
             <select id="municipio" formControlName="id" class="form-control"
@@ -171,22 +171,20 @@
           <div class="col-md-4 mb-3">
             <label for="email">*Email:</label>
             <input type="text" formControlName="email" id="email" class="form-control" 
-              [ngClass]="{ 'is-invalid': f.usuario.errors && (f.usuario.dirty || f.usuario.touched)}" />
-            <div *ngIf="f.usuario.errors && (f.usuario.dirty || f.usuario.touched)" class="invalid-feedback">
-              <div *ngIf="f.usuario.errors.required">O email é obrigatório</div>
-              <div *ngIf="f.usuario.errors.pattern">O email está invalido</div>
+              [ngClass]="{ 'is-invalid': f.usuario.get('email')?.errors && (f.usuario.get('email')?.dirty || f.usuario.get('email')?.touched)}" />
+            <div *ngIf="f.usuario.get('email')?.errors && (f.usuario.get('email')?.dirty || f.usuario.get('email')?.touched)" class="invalid-feedback">
+              <div *ngIf="f.usuario.get('email')?.errors?.required">O email é obrigatório</div>
+              <div *ngIf="f.usuario.get('email')?.errors?.pattern">O email está invalido</div>
             </div>
           </div>
           <div class="col-md-4 mb-3">
             <label for="telefone">*Senha:</label>
             <input type="password" formControlName="senha" id="senha" class="form-control" 
-               [ngClass]="{ 'is-invalid': f.usuario.errors && (f.usuario.dirty || f.usuario.touched)}" />
-               <div *ngIf="f.usuario.errors && (f.usuario.dirty || f.usuario.touched)" class="invalid-feedback">
-                <div *ngIf="f.usuario.errors.required">A senha é obrigatória</div>         
+               [ngClass]="{ 'is-invalid': f.usuario.get('senha')?.errors && (f.usuario.get('senha')?.dirty || f.usuario.get('senha')?.touched)}" />
+               <div *ngIf="f.usuario.get('senha')?.errors && (f.usuario.get('senha')?.dirty || f.usuario.get('senha')?.touched)" class="invalid-feedback">
+                <div *ngIf="f.usuario.get('senha')?.errors?.required">A senha é obrigatória</div>         
               </div>
-          </div>
-          
-          
+          </div>     
           </div>
          </div>
         <div class="form-group">

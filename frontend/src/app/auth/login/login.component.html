@@ -40,7 +40,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
-                <input type="senha" formControlName="senha" id="senha" class="form-control"
+                <input type="password" formControlName="senha" id="senha" class="form-control"
                 placeholder="Your senha" required [ngClass]="{ 'is-invalid': submitted && f.senha.errors }" />
                 <div *ngIf="submitted && f.senha.errors" class="invalid-feedback">
                   <div *ngIf="f.senha.errors.required">Senha is required</div>
@@ -56,9 +56,9 @@
                 </label>
               </div>
             </div>
-            <!--<div class="form-group">
+            <div class="form-group">
               <re-captcha formControlName="captcha" siteKey="6Lfh_MUZAAAAADMfvC9kMCxcpmGqBWlZPH8NNTLA" required></re-captcha>
-            </div>-->
+            </div>
             <div class="form-group text-center">
               <button [disabled]="loading && loginForm.invalid"  class="btn btn-dark shadow border-0 my-4">Sign in</button>
             </div>
