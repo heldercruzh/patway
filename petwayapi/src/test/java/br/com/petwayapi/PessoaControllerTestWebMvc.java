@@ -105,7 +105,7 @@ public class PessoaControllerTestWebMvc {
     {
 
         Pessoa pessoa = new Pessoa();
-        pessoa.setId(new Long(1));
+        pessoa.setId(new Integer(1));
         pessoa.setNome("Nome Teste");
 
         Usuario usuario = new Usuario();

@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping("/pessoa")
-public class PessoaController extends GenericController<Pessoa, Long> {
+public class PessoaController extends GenericController<Pessoa, Integer> {
   
 	@Autowired
     public PessoaController(PessoaRepository repo) {
@@ -43,7 +43,7 @@ public class PessoaController extends GenericController<Pessoa, Long> {
      */
 
     @Override
-    public @ResponseBody Pessoa update (@PathVariable Long id, @RequestBody Pessoa json){
+    public @ResponseBody Pessoa update (@PathVariable Integer id, @RequestBody Pessoa json){
 
         this.logger.debug("update() of id#{} with body {}", id, json);
         this.logger.debug("T json is of type {}", json.getClass());

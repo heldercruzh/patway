@@ -25,6 +25,7 @@ import { AdminFooterComponent } from './admin/admin-footer/admin-footer.componen
 import { AdminNavbarComponent } from './admin/admin-navbar/admin-navbar.component';
 import { ClienteCadComponent } from './admin/admin-pages/cliente-cad/cliente-cad.component';
 import { ClienteListComponent } from './admin/admin-pages/cliente-list/cliente-list.component';
+import { PagamentoComponent } from './admin/admin-pages/pagamento/pagamento.component';
 import { HomeComponent } from './admin/admin-pages/home/home.component';
 import { ForgetpasswordComponent } from './auth/forgetpassword/forgetpassword.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -39,6 +40,14 @@ import { authInterceptorProviders } from './auth/helpers/auth.interceptor';
 // To use captcha
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {
+  GoogleLoginProvider,
+  FacebookLoginProvider
+} from 'angularx-social-login';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -50,6 +59,7 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     RegisterComponent,
     LoginComponent,
     ForgetpasswordComponent,
+    PagamentoComponent,
   ],
   exports: [
     AppComponent
@@ -71,9 +81,30 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     TextMaskModule,
     SharedModule,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    SocialLoginModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [
+    authInterceptorProviders,
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '1018977001682-rsl0j4f0aaar7iposnq55418mfgisaf9.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('clientId')
+          }
+        ]
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [ AppComponent ],
   entryComponents: [ ConfirmModalComponent, AlertModalComponent ]
 })

@@ -9,8 +9,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
+
 @Entity
 public class Municipio {
 
@@ -35,4 +34,35 @@ public class Municipio {
 	@JoinColumn(name = "uf_id")
 	private Uf uf;
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getCodigoIbge() {
+		return codigoIbge;
+	}
+
+	public void setCodigoIbge(String codigoIbge) {
+		this.codigoIbge = codigoIbge;
+	}
+
+	public String getNomeMunicipio() {
+		return nomeMunicipio;
+	}
+
+	public void setNomeMunicipio(String nomeMunicipio) {
+		this.nomeMunicipio = nomeMunicipio;
+	}
+
+	public br.com.petwayapi.models.Uf getUf() {
+		return uf;
+	}
+
+	public void setUf(br.com.petwayapi.models.Uf uf) {
+		this.uf = uf;
+	}
 }

@@ -134,10 +134,83 @@ Angular JWT 11
 Sprint boot jwt
 1)https://github.com/bezkoder/spring-boot-spring-security-jwt-authentication
 
-Social Login
+Social Login implementação
 1) https://www.npmjs.com/package/angularx-social-login
 2) https://developers.google.com/identity/sign-in/web/sign-in
 
+Social login facebook
+1) https://developers.facebook.com/docs/facebook-login/web
+
+Social login google
+1) https://console.developers.google.com/apis/credentials
+
+
+Cliente OAuth criado google
+1) chave secreta: wP4RZMe0e8rNx3EmgWd0Eqnu
+2) id cliente: 1018977001682-rsl0j4f0aaar7iposnq55418mfgisaf9.apps.googleusercontent.com
+
+
+OAuth 2.0
+1) https://www.baeldung.com/rest-api-spring-oauth2-angular
+2) https://www.baeldung.com/spring-security-oauth-jwt
+
+Tutorial OAuth para login social no sprint boot
+1) https://github.com/callicoder/spring-boot-react-oauth2-social-login-demo
+2) https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/
+2) https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-2/
+
+OU
+
+https://o7planning.org/11823/example-of-oauth2-social-login-in-spring-boot
+
+
+Envio de email:
+1) https://receitasdecodigo.com.br/spring-boot/como-configurar-projetos-spring-boot-para-enviar-e-mail
+
+Pague seguro Sandbox
+Nome: Teate Envio Email
+CPF: 798.570.530-92
+email: testeenvioemail486@gmail.com
+senha: email@486
+
+Pague Seguro:
+1) https://www.youtube.com/watch?v=w2xTkT5My7g
+
+Documentação da Biblioteca PagSeguro Java. Abaixo: 
+https://goo.gl/6qGPHo
+
+
+OU
+
+https://github.com/pagseguro/pagseguro-sdk-java
+https://mvnrepository.com/artifact/br.com.uol.pagseguro/pagseguro-api
+https://github.com/tawangabriel10/java-pagseguro/tree/master/src/main
+https://www.javaavancado.com/spring-mvc-com-pagseguro/
+
+Jasper
+1) https://aspiresoftware.in/blog/jasperreports-with-jhipster-spring-boot-angular/
+
+instalar jasper studio
+1) https://community.jaspersoft.com/project/jaspersoft-studio/releases
+
+
+
+
+Exemplos gerais Spring boot:
+1) https://github.com/Baeldung
+
+Caminhos do linux:
+1) http://luizricardo.org/2014/04/caminhos-relativos-absolutos-e-outras-rotinas-de-arquivos-em-java/
+
+Jasper Report com Spring Boot
+1) https://github.com/Java-Techie-jt/spring-jasper-report/tree/master/src/main/java/com/javatechie/report
+
+ou
+2) INFERIOR - https://github.com/LincolnLuiz/SpringBoot-JasperReports/tree/master/src
+
+
+Geração de arquivos no Jasper
+XLSX - https://javahowtos.com/guides/113-data-import-export/377-create-and-download-jasper-report-xlsx-via-rest-service-in-spring-boot.html
 
 
 
@@ -163,33 +236,72 @@ Social Login
 
 
 
+Esqueci a senha so com email
 
-<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.flywaydb</groupId>
-				<artifactId>flyway-maven-plugin</artifactId>
-				<version>3.0</version>
+heldercruzh,
 
-				<configuration>
-					<user>postgres</user>
-					<password>root</password>
-					<url>jdbc:postgresql://localhost\:5432/petwaydb</url>
-					<locations>
-						<location>filesystem:src/main/resources/migrations</location>
-					</locations>
-					<skip>false</skip>
-				</configuration>
-			</plugin>
-			
-			
-			
-			
-			
-			<dependency>
-			<groupId>org.flywaydb</groupId>
-			<artifactId>flyway-core</artifactId>
-			<version>3.0</version>
-		</dependency>
+A request to reset the password for your account has been made at Jaspersoft Community.
+
+You may now log in by clicking this link or copying and pasting it to your browser:
+
+https:xxxxxx
+
+This link can only be used once to log in and will lead you to a page where you can set your password. It expires after one day and nothing will happen if it is not used.
+
+Thank you for your continued interest and involvement in the Jaspersoft Community.
+
+
+- The Jaspersoft Community Team
+
+
+---
+Reset password
+This is a one-time login for heldercruzh and will expire on February 12, 2021 - 9:02pm.
+
+Click on this button to log in to the site and change your password.
+
+This login can be used only once.
+log in
+
+
+Password compliance:
+
+----
+Username *
+E-mail address *
+Password
+Password
+
+Password does not meet the following requirements:
+Password must have upper and lower case letters.
+Password must have at least 1 letter(s).
+Password must have at least 8 character(s).
+Password must have at least 1 digit(s).
+Password must have at least 1 special character(s).
+
+Passwords must meet the following requirements:
+Password must have upper and lower case letters.
+Password must have at least 1 letter(s).
+Password must have at least 8 character(s).
+Password must have fewer than 3 identical consecutive characters.
+Password must have at least 1 digit(s).
+Password must have at least 1 special character(s).
+Password must not contain their username.
+
+lista
+- Jasper
+- upload de imagens
+- flyway
+- teste unitario no frontend
+- carrocel
+- abas
+- modal cadastro (esqueci a senha)
+- breanch develop
+- type script
+- docket
+- kubernet
+- pague seguro
+- OAuth
+
+
+- app

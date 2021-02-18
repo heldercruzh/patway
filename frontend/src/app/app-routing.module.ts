@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { ClienteCadComponent } from './admin/admin-pages/cliente-cad/cliente-cad.component';
 import { ClienteListComponent } from './admin/admin-pages/cliente-list/cliente-list.component';
+import { PagamentoComponent } from './admin/admin-pages/pagamento/pagamento.component';
 import { HomeComponent } from './admin/admin-pages/home/home.component';
 import { AuthGuard } from './auth/helpers/auth.guard';
 import { ForgetpasswordComponent } from './auth/forgetpassword/forgetpassword.component';
@@ -22,6 +23,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    canActivate: [AuthGuard]},
+  {
+    path: 'pagamento/:id',
+    component: PagamentoComponent,
     canActivate: [AuthGuard]},
   {
     path: 'cliente-cad',

@@ -7,7 +7,6 @@ import { Pessoa } from '../models/pessoa';
   providedIn: 'root'
 })
 
-@Injectable({ providedIn: 'root' })
 export class PessoaService extends GenericService<Pessoa>{
   constructor(http: HttpClient) {
     super(http, 'pessoa');

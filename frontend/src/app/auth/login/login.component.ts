@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
     this.socialAuthService.authState.subscribe((socialUser) => {
       this.socialUser = socialUser;
       this.loggedIn = (socialUser != null);
+      console.log("email: "+socialUser.email+"chave: "+ socialUser.authToken)
     });
 
     this.clearForm();
