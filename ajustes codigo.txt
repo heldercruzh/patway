@@ -212,14 +212,27 @@ ou
 Geração de arquivos no Jasper
 XLSX - https://javahowtos.com/guides/113-data-import-export/377-create-and-download-jasper-report-xlsx-via-rest-service-in-spring-boot.html
 
+Service spring boot
+https://receitasdecodigo.com.br/spring-framework/diferenca-entre-@pathvariable-e-@requestparam-do-spring-mvc
 
+Request Mapping
+https://stackabuse.com/spring-annotations-requestmapping-and-its-variants/
 
+Spring Data Query methods
+https://www.amitph.com/spring-data-jpa-query-methods/
+https://www.mballem.com/post/spring-data-jpa-modifying-queries/
 
+Querydsl
+https://spring.io/blog/2011/04/26/advanced-spring-data-jpa-specifications-and-querydsl/
 
+Dinamic query implement repository
+https://stackoverflow.com/questions/41376975/how-to-write-dynamic-native-sql-query-in-spring-data-jpa
+https://medium.com/@sindepal/spring-data-jpa-query-and-pageable-15f8c3e7fe4e
 
-
-
-
+Paginação Spring boot
+https://fabiano-goes.medium.com/api-rest-com-pagina%C3%A7%C3%A3o-usando-spring-data-e-query-9eddb29c9223
+https://github.com/fabianogoes/demo-pageable/tree/master/src/main/java/com/example/demopageable
+https://www.baeldung.com/spring-data-jpa-pagination-sorting
 
 
 

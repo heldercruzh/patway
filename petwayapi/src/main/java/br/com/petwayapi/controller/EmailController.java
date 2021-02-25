@@ -1,13 +1,13 @@
 package br.com.petwayapi.controller;
 
+import br.com.petwayapi.models.Pessoa;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.mail.javamail.MimeMessageHelper;
-
+import br.com.petwayapi.models.EmailRequest;
 import javax.mail.internet.MimeMessage;
 
 @RestController
@@ -15,40 +15,39 @@ public class EmailController {
 
     @Autowired private JavaMailSender mailSender;
 
-    @RequestMapping(path = "/email-send", method = RequestMethod.GET)
-    public String sendMail() {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("testeenvioemail486@gmail.com");
-        message.setTo("heldercruzh@gmail.com");
-        message.setSubject("teste de email assunto");
-        message.setText("teste de email corpo");
+    @Value("${spring.mail.username}")
+    private String remetente;
 
+    @RequestMapping(path = "/email-send", method = RequestMethod.POST)
+    public void sendMail(@RequestBody EmailRequest email) {
         try {
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(remetente);
+            message.setTo(email.getDestinatario());
+            message.setSubject(email.getAssunto());
+            message.setText(email.getTexto());
+
             mailSender.send(message);
-            return "Email enviado com sucesso!";
         } catch (Exception e) {
             e.printStackTrace();
-            return "Erro ao enviar email.";
         }
     }
 
-    @RequestMapping(path = "/email-send-html", method = RequestMethod.GET)
-    public String sendMailHtml() {
+    @RequestMapping(path = "/email-send-html", method = RequestMethod.POST)
+    public void sendMailHtml(@RequestBody EmailRequest email) {
         try {
             MimeMessage mail = mailSender.createMimeMessage();
 
             MimeMessageHelper message = new MimeMessageHelper( mail );
-            message.setFrom("testeenvioemail486@gmail.com");
-            message.setTo("heldercruzh@gmail.com");
-            message.setSubject("teste de email assunto html");
-            message.setText("teste de email corpo html");
+            message.setFrom(remetente);
+            message.setTo(email.getDestinatario());
+            message.setSubject(email.getAssunto());
+            message.setText(email.getTexto());
 
             mailSender.send(mail);
 
-            return "OK";
         } catch (Exception e) {
             e.printStackTrace();
-            return "Erro ao enviar e-mail";
         }
     }
 }

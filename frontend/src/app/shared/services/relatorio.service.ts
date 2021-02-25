@@ -14,9 +14,14 @@ export class RelatorioService {
   
   constructor(public http: HttpClient) { }
 
-  export(relatorio: Relatorio) {
-    return this.http.post(`${environment.apiUrl}/lista_contatos`, relatorio, {
+
+  export(arrayDados: any, formato: string) {
+    //var relatorio: Relatorio = new Relatorio(arrayDados, formato);
+    return this.http.post(`${environment.apiUrl}/lista_contatos`, { arrayDados, formato }, {
         responseType: 'blob'
       });
   }
+
+
+  
 }

@@ -15,7 +15,7 @@ public class Pessoa {
 	@Id
 	@Column(nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	@ApiModelProperty(value = "Nome da pessoa")
 	@Size(message="O nome deve ter até 100 caracteres", max=100)
@@ -112,11 +112,11 @@ public class Pessoa {
 	@Column(nullable = false, columnDefinition = "boolean default true")
 	private boolean ativo;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

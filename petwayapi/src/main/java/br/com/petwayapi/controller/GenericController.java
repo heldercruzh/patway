@@ -45,12 +45,13 @@ public abstract class GenericController<T, ID extends Serializable> {
         return Lists.newArrayList(all);
         
     }
-    
+
+
     @RequestMapping(value="/{id}", method=RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody T get(@PathVariable ID id) {
         return this.repo.findById(id).get();
     }
-    
+
 
     @RequestMapping(method=RequestMethod.POST, consumes={MediaType.APPLICATION_JSON_VALUE}, produces={MediaType.APPLICATION_JSON_VALUE})
     public @ResponseBody T create(@Valid @RequestBody T json) {

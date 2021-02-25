@@ -1,14 +1,14 @@
-package br.com.petwayapi.payloader;
+package br.com.petwayapi.models;
 
 
 import java.util.List;
 
-public class Relatorio {
+public class RelatorioRequest {
 
     private List<Object> arrayDados;
     private String formato;
 
-    public Relatorio(List<Object> arrayDados, String formato) {
+    public RelatorioRequest(List<Object> arrayDados, String formato) {
         this.arrayDados = arrayDados;
         this.formato = formato;
     }

@@ -1,10 +1,13 @@
 package br.com.petwayapi.controller;
 
+import br.com.petwayapi.models.Municipio;
+import br.com.petwayapi.models.Uf;
 import br.com.petwayapi.repository.UsuarioRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,10 @@ import br.com.petwayapi.repository.PessoaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 
 @ApiOperation(value = "Retorna uma lista de pessoas")
@@ -24,17 +31,32 @@ import org.slf4j.LoggerFactory;
 
 @Controller
 @RequestMapping("/pessoa")
-public class PessoaController extends GenericController<Pessoa, Integer> {
-  
+public class PessoaController extends GenericController<Pessoa, Long> {
+
 	@Autowired
+    PessoaRepository repoPessoa;
+
     public PessoaController(PessoaRepository repo) {
-        super(repo);
+	    super(repo);
     }
 
     @Autowired
     UsuarioRepository usuarioRepository;
 
     private Logger logger = LoggerFactory.getLogger(UsuarioController.class);
+
+
+    @RequestMapping(value="/consulta", method=RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE})
+    public @ResponseBody List<Pessoa> findByNome(
+            @RequestParam Map<String, String> params) {
+
+        return this.repoPessoa.consultaSpringData(
+                params.get("cpf"),
+                params.get("nome"),
+                Integer.parseInt(params.get("uf")),
+                Integer.parseInt(params.get("municipio"))
+                );
+    }
 
     /*
      * Override for update with encrypted password before to save
@@ -43,7 +65,7 @@ public class PessoaController extends GenericController<Pessoa, Integer> {
      */
 
     @Override
-    public @ResponseBody Pessoa update (@PathVariable Integer id, @RequestBody Pessoa json){
+    public @ResponseBody Pessoa update (@PathVariable Long id, @RequestBody Pessoa json){
 
         this.logger.debug("update() of id#{} with body {}", id, json);
         this.logger.debug("T json is of type {}", json.getClass());

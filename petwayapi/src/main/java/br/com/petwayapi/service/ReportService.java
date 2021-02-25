@@ -1,6 +1,5 @@
 package br.com.petwayapi.service;
 
-import br.com.petwayapi.payloader.Relatorio;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.HtmlExporter;
@@ -31,7 +30,7 @@ public class ReportService {
 
         //Compilar e salvar Layout
         JasperReport jasperReport = JasperCompileManager.compileReport(path+"/"+nomeRelatorio+".jrxml");
-        JRSaver.saveObject(jasperReport, path+"/"+nomeRelatorio+".jasper");
+        //JRSaver.saveObject(jasperReport, path+"/"+nomeRelatorio+".jasper");
 
         //Define o valor dos parametros
         Map<String, Object> parameters = new HashMap<>();
