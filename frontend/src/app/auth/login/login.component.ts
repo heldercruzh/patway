@@ -37,7 +37,18 @@ export class LoginComponent implements OnInit {
     this.socialAuthService.authState.subscribe((socialUser) => {
       this.socialUser = socialUser;
       this.loggedIn = (socialUser != null);
-      console.log("email: "+socialUser.email+"chave: "+ socialUser.authToken)
+      console.log("0) "+this.loggedIn+
+      " provider: "+socialUser.provider+
+      " id: "+ socialUser.id+
+      " email: "+ socialUser.email+
+      " name: "+ socialUser.name+
+      " photoUrl: "+ socialUser.photoUrl+
+      " firstName: "+ socialUser.firstName+
+      " lastName: "+ socialUser.lastName+
+      " authToken: "+ socialUser.authToken+
+      " idToken: "+ socialUser.idToken+
+      " authorizationCode: "+ socialUser.authorizationCode+
+      " response: "+ socialUser.response)
     });
 
     this.clearForm();
@@ -103,7 +114,29 @@ export class LoginComponent implements OnInit {
   }
 
   public signInWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
+      (socialUser) => {
+        //this.authService.retrieveToken(socialUser)
+        
+        this.authService.signInSocial(socialUser).subscribe(
+          token => {
+            console.log(token);
+            //this.tokenStorage.saveToken(data.token || '');
+            //this.tokenStorage.saveUser(data);
+            //this.isLoginFailed = false;
+            //this.loggedIn = true; System.out.println("teste");
+            //this.roles = this.tokenStorage.getUser().roles;
+            //this.reloadPage();
+          },
+          err => {
+            this.isLoginFailed = true;
+            this.clearForm();
+            this.modal.showAlertDanger(err.message);
+            console.log(err.message);
+          }
+        );
+      }
+    );
   }
 
   public signInWithFB(): void {

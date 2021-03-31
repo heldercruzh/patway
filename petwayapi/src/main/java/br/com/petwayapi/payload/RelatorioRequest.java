@@ -1,4 +1,4 @@
-package br.com.petwayapi.models;
+package br.com.petwayapi.payload;
 
 
 import java.util.List;

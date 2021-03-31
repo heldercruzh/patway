@@ -19,6 +19,8 @@ Spring bach -> https://spring.io/projects/spring-batch
 orientações springboot
 1) https://www.oracle.com/br/technical-resources/articles/dsl/crud-rest-sb2-hibernate.html
 
+Instalar INTELIJ
+https://pt.coredump.biz/questions/30130934/how-to-install-intellij-idea-on-ubuntu
 
 INTELIJ Atalhos
 https://www.youtube.com/watch?v=K4UNP1ZjftQ
@@ -234,19 +236,72 @@ https://fabiano-goes.medium.com/api-rest-com-pagina%C3%A7%C3%A3o-usando-spring-d
 https://github.com/fabianogoes/demo-pageable/tree/master/src/main/java/com/example/demopageable
 https://www.baeldung.com/spring-data-jpa-pagination-sorting
 
+Login OAuth
+1) https://docs.spring.io/spring-security/site/docs/5.0.7.RELEASE/reference/html/oauth2login-advanced.html
+2) Implementação 1: https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-1/
+3) Implementação 2: https://www.callicoder.com/spring-boot-security-oauth2-social-login-part-2/
+
+https://www.javachinna.com/spring-boot-angular-10-user-registration-oauth2-social-login-part-2/
+https://www.javachinna.com/spring-boot-angular-10-user-registration-oauth2-social-login-part-3/
+
+Login Universal Auth0
+https://auth0.com/blog/complete-guide-to-angular-user-authentication/
 
 
+Keycloak
+https://www.keycloak.org/
+https://www.baeldung.com/spring-boot-keycloak
+
+Angular OAuth
+https://dzone.com/articles/login-with-facebook-and-google-using-angular-8
+https://tecknoworks.com/how-to-integrate-social-login-in-a-web-api-solution/
+https://tecknoworks.com/how-to-integrate-social-login-in-a-web-api-solution/
+
+https://www.devglan.com/spring-security/spring-boot-oauth2-angular
+
+Oauth
+https://developers.google.com/youtube/v3/guides/auth/server-side-web-apps?hl=pt-br
+https://oauth.net/code/
 
 
+OPEN ID e OAUTH
+https://www.youtube.com/watch?v=BdKmZ7mPNns
+https://www.youtube.com/watch?v=LyqeHAkxVyk
 
 
+Spring boot and angular oauth 2
+https://github.com/JavaChinna/spring-boot-angular-oauth2-social-login-demo
 
 
+Instalar Java 11
+https://www.digitalocean.com/community/tutorials/como-instalar-o-java-com-apt-no-ubuntu-18-04-pt
+1) sudo apt install openjdk-11-jdk
+2) java -version
 
+Spring Method Security
+https://www.baeldung.com/spring-security-method-security
+https://developer.okta.com/blog/2019/06/20/spring-preauthorize
+https://www.baeldung.com/spring-security-granted-authority-vs-role
+https://dzone.com/articles/secure-a-spring-boot-app-with-spring-security-and
 
+ROLES
+https://www.youtube.com/watch?v=MM14uwVhVhc
 
+Keycloak
+https://www.baeldung.com/spring-boot-keycloak
 
+-> https://www.keycloak.org/downloads.html
+unzip keycloak-11.0.2.zip 
+cd keycloak-11.0.2/bin
+./standalone.sh -Djboss.socket.binding.port-offset=100
+http: // localhost: 8180 
+initial1 
+zaq1! QAZ
 
+OAuth Develop
+https://developers.facebook.com/
+https://github.com/settings/apps
+https://console.developers.google.com/
 
 
 Esqueci a senha so com email
@@ -269,7 +324,7 @@ Thank you for your continued interest and involvement in the Jaspersoft Communit
 
 ---
 Reset password
-This is a one-time login for heldercruzh and will expire on February 12, 2021 - 9:02pm.
+This is a one-time login /for heldercruzh and will expire on February 12, 2021 - 9:02pm.
 
 Click on this button to log in to the site and change your password.
 
@@ -318,3 +373,27 @@ lista
 
 
 - app
+
+
+
+http://localhost:8080/auth/signup
+
+{
+    "name": "Helder",
+    "username": "heldercruzh",
+    "email": "hh@g.c",
+    "password": "123"
+}
+
+http://localhost:8080/auth/login
+
+{
+    "email": "hh@g.c",
+    "password": "123"
+}
+
+Authorization: Bearer <accessToken>
+
+
+
+

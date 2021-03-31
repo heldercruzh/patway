@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import br.com.petwayapi.models.JwtRequest;
+import br.com.petwayapi.payload.JwtRequest;
 import br.com.petwayapi.models.Usuario;
 import br.com.petwayapi.repository.UsuarioRepository;
 

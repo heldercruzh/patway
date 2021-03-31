@@ -1,13 +1,12 @@
 package br.com.petwayapi.controller;
 
-import br.com.petwayapi.models.Pessoa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import br.com.petwayapi.models.EmailRequest;
+import br.com.petwayapi.payload.EmailRequest;
 import javax.mail.internet.MimeMessage;
 
 @RestController

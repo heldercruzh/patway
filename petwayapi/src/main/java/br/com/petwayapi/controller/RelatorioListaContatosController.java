@@ -2,14 +2,13 @@ package br.com.petwayapi.controller;
 
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.petwayapi.models.RelatorioRequest;
+import br.com.petwayapi.payload.RelatorioRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import br.com.petwayapi.service.ReportService;
 import net.sf.jasperreports.engine.JRException;
 import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequestMapping("/lista_contatos")

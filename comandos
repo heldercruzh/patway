@@ -81,8 +81,14 @@ Node
 1) apt-get install -y nodejs
 2) apt install npm
 
+Remover java
+https://askubuntu.com/questions/84483/how-to-completely-uninstall-java
+https://medium.com/@viniciusalexandresaraiva/desinstalar-java-11-no-linux-ubuntu-mint-e-instalar-java-8-444565b49ccc
+sudo rm -r /usr/lib/jvm/java-11-oracle
 
-
+sudo apt install openjdk-8-jdk openjdk-8-jre
+sudo apt install openjdk-11-jdk openjdk-11-jre
+sudo rm -rf /usr/lib/jvm/*
 
 Instalar Node
 
