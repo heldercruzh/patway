@@ -8,7 +8,9 @@ https://www.edivaldobrito.com.br/como-instalar-o-google-chrome-no-ubuntu-20-04-v
 3) sudo apt-get update
 4) sudo apt install google-chrome-stable
 
+CHMOD recursivo
 
+chmod -R 777 *
 
 -> Visual Studio Code
 
@@ -125,9 +127,15 @@ Create database petwaydb;
 Spotfy
 1) snap install spotify
 
+Testar endponts
+curl -X GET <endpont>
+curl -v -X GET <endpont> -H "Autorization: bearer $access_token"
+export access_token=$(curl -X POST http://localhost:8180/auth/relm/master/protocol/openid-connect/token -H 'content-type: applicatin/x-www-form/urlencoded' -d 'username=pedro&password=test&grant_type=password&clientid=servid=ce-jaxrs' | jq --raw-output '.access_token')
 
 
+http://localhost:8180/auth/realms/myprojects/broker/google/endpoint
 
+http://localhost:8180/auth/realms/myprojects/protocol/openid-connect/auth?client_id=account-console&redirect_uri=http%3A%2F%2Flocalhost%3A8180%2Fauth%2Frealms%2Fmyprojects%2Faccount%2F%23%2F&state=51aaecc5-3ee1-4426-8b55-9fef727f5cb4&response_mode=fragment&response_type=code&scope=openid&nonce=9fd84b98-6a12-4489-b348-5e63c2ea5c00&code_challenge=K_tdCInzodnghTmmykVtLO1Nf-ENvrUIfj_-e2Eqi_I&code_challenge_method=S256
 
 
 ATALHOS

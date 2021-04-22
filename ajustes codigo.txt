@@ -177,6 +177,7 @@ senha: email@486
 
 Pague Seguro:
 1) https://www.youtube.com/watch?v=w2xTkT5My7g
+https://www.youtube.com/watch?v=w2xTkT5My7g
 
 Documentação da Biblioteca PagSeguro Java. Abaixo: 
 https://goo.gl/6qGPHo
@@ -287,14 +288,25 @@ https://dzone.com/articles/secure-a-spring-boot-app-with-spring-security-and
 ROLES
 https://www.youtube.com/watch?v=MM14uwVhVhc
 
+https://www.youtube.com/watch?v=TATgP4h8xzw
+
 Keycloak
 https://www.baeldung.com/spring-boot-keycloak
 
+Keycloak-angular
+https://github.com/mauriciovigolo/keycloak-angular
+https://github.com/mauriciovigolo/keycloak-angular/tree/master/example/src/app
+https://medium.com/keycloak/secure-angular-app-with-keycloak-63ec934e5093
+https://blog.bitsrc.io/integrating-keycloak-with-angular-for-sso-authentication-9d1c6c2d2742
+
+
+Keycloak/Wildfly
 -> https://www.keycloak.org/downloads.html
+
 unzip keycloak-11.0.2.zip 
 cd keycloak-11.0.2/bin
 ./standalone.sh -Djboss.socket.binding.port-offset=100
-http: // localhost: 8180 
+http://localhost:8180 
 initial1 
 zaq1! QAZ
 
@@ -302,6 +314,18 @@ OAuth Develop
 https://developers.facebook.com/
 https://github.com/settings/apps
 https://console.developers.google.com/
+
+keycloak
+./standalone.sh -Djboss.socket.binding.port-offset=100
+http://localhost:8180/
+npm i keycloak-js --save
+LOGIN RELM: http://localhost:8180/auth/realms/myprojects/login-actions/authenticate?execution=b5e7375e-6e3a-4891-aa39-60b43fe65621&client_id=security-admin-console&tab_id=4SODNEM29Qw
+TOKEN: http://localhost:8180/auth/realms/myprojects/protocol/openid-connect/token
+CONTA: http://localhost:8180/auth/realms/myprojects/account
+
+Keycloak Spring Boot
+https://www.baeldung.com/spring-boot-keycloak
+
 
 
 Esqueci a senha so com email
@@ -396,4 +420,5 @@ Authorization: Bearer <accessToken>
 
 
 
+14:30h
 

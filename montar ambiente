@@ -1,0 +1,78 @@
+CONFIGURAÇÃO DE USUÁRIO (ÚNICA VEZ)
+git config --global user.name "Desenvolvedor X"
+git config --global user.email desenvolvedor.x@dbccompany.com.br
+
+
+COMITANDO PROJETO NOVO DIRETO NA MASTER
+
+…or create a new repository on the command line
+echo "# maosaobra" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/heldercruzh/maosaobra.git
+git push -u origin main
+
+…or push an existing repository from the command line
+git remote add origin https://github.com/heldercruzh/maosaobra.git
+git branch -M main
+git push -u origin main
+
+GIT Remover origem 
+git remote remove origin
+
+GIT COMMIT na master
+git status
+git add .
+git commit -m "second commit" 
+git push -u origin main
+
+GIT MANUTENÇÃO EM PROJETO
+git clone https://github.com/heldercruzh/maosaobra.git
+git checkout -b issue_1101 
+git push -u origin issue_1101
+
+GIT MERGE COM MASTER
+# Merge in the new-feature branch
+git checkout main
+git merge issue_1102
+
+GIT MERGE COM BRANCH
+git checkout issue_1101
+git merge issue_1103
+git status
+<<Resolver conflitos>>
+git add .
+git commit
+
+git status
+git commit -am "Versão Inicial de hello.md"
+git push -u origin issue_1101
+
+
+REMOVER Branch
+git push origin :nome_do_branch
+git branch -d nome_do_branch
+
+
+
+
+GIT util
+https://www.dbccompany.com.br/git-para-principiantes/
+https://www.dbccompany.com.br/git-para-principiantes-parte-ii/
+
+
+GIT LINKS PARA QUANDO DÁ MERDA
+https://www.magenteiro.com/blog/para-magenteiros/comandos-git-uteis/
+
+
+GIT documentação
+https://git-scm.com/docs/git-clean/pt_BR
+
+Comandos linux
+rm -r
+mkdir
+
+VERSÕES GRAFICAS DO GIT
+https://desktop.github.com
